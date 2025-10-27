@@ -1,6 +1,5 @@
 package com.geekyouup.android.ustopwatch;
 
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
@@ -56,10 +55,6 @@ public class TimeUtils {
         mStringBuilder.append(numMillis);
 
         return mStringBuilder.toString();
-
-		/*return (isNeg?"-":"")+((numHours < 10 ? "0" : "") + numHours) + ":" + ((numMins < 10 ? "0" : "") + numMins) + ":"
-                + ((numSecs < 10 ? "0" : "") + numSecs) + "." + (numMillis < 10 ? "00" : (numMillis < 100 ? "0" : ""))
-				+ numMillis;*/
     }
 
     public static SpannableString createStyledSpannableString(Context context, double time, boolean lightTheme) {
@@ -74,9 +69,9 @@ public class TimeUtils {
         if (mMinsValue == 0) mMinsValue = mins;
         if (mHoursValue == 0) mHoursValue = hours;
 
-        final TextView mSecsText = (TextView) countdownView.findViewById(R.id.secsTxt);
-        final TextView mMinsText = (TextView) countdownView.findViewById(R.id.minsTxt);
-        final TextView mHoursText = (TextView) countdownView.findViewById(R.id.hoursTxt);
+        final TextView mSecsText = countdownView.findViewById(R.id.secsTxt);
+        final TextView mMinsText = countdownView.findViewById(R.id.minsTxt);
+        final TextView mHoursText = countdownView.findViewById(R.id.hoursTxt);
         mSecsText.setText(Integer.toString(mSecsValue));
         mSecsText.addTextChangedListener(new TextWatcher() {
             @Override

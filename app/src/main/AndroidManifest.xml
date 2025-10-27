@@ -37,4 +37,4 @@
         <service android:name=".AlarmUpdater$UpdateService" />
 
     </application>
-</manifest> 
+</manifest>

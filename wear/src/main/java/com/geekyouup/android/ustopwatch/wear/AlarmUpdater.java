@@ -101,7 +101,7 @@ public class AlarmUpdater {
         // The PendingIntent to launch our activity if the user selects this notification
         Intent launcher = new Intent(context, WearActivity.class);
         launcher.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, launcher, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, launcher, PendingIntent.FLAG_ONE_SHOT  | PendingIntent.FLAG_IMMUTABLE);
 
         Notification notification = new NotificationCompat.Builder(context)
                 .setContentTitle(context.getString(R.string.app_name))

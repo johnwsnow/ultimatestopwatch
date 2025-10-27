@@ -48,12 +48,12 @@ public class LapTimeRecorder {
             SharedPreferences.Editor editor = settings.edit();
             if (editor != null) {
                 editor.clear();
-                if (mLapTimes != null && mLapTimes.size() > 0) {
+                if (mLapTimes != null && !mLapTimes.isEmpty()) {
                     for (int i = 0; i < mLapTimes.size(); i++) {
                         editor.putLong(KEY_LAPTIME_X + i, mLapTimes.get(i).longValue());
                     }
                 }
-                editor.commit();
+                editor.apply();
             }
         }
     }
@@ -67,7 +67,7 @@ public class LapTimeRecorder {
     }
 
     public void stopwatchReset() {
-        if (mLapTimes.size() > 0 && mLapTimes.get(0) != null && mLapTimes.get(0) == 0)
+        if (!mLapTimes.isEmpty() && mLapTimes.get(0) != null && mLapTimes.get(0) == 0)
             return; //don't record multiple resets
         mLapTimes.add(0, 0d);
     }
@@ -97,7 +97,7 @@ public class LapTimeRecorder {
         SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME_LAPTIMES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
 
         if (activity != null) {
             LapTimesFragment ltf = activity.getLapTimeFragment();

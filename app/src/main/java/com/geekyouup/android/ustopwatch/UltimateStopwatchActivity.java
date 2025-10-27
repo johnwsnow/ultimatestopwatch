@@ -3,10 +3,7 @@ package com.geekyouup.android.ustopwatch;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.media.AudioManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import com.google.android.material.tabs.TabLayout;
@@ -18,7 +15,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.MenuInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
 
 import com.geekyouup.android.ustopwatch.fragments.*;
 
@@ -56,27 +52,22 @@ public class UltimateStopwatchActivity extends AppCompatActivity {
 
         getWindow().setBackgroundDrawable(null);
 
-        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
+
+
+        Toolbar tb = findViewById(R.id.toolbar);
         setSupportActionBar(tb);
 
         setTitle("");
 
         mSoundManager = SoundManager.getInstance(this);
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = findViewById(R.id.viewpager);
         mViewPager.setOffscreenPageLimit(2);
 
         setupTabs();
 
         mPowerMan = (PowerManager) getSystemService(Context.POWER_SERVICE);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-
-        // stop landscape on QVGA/HVGA
-        int screenSize = getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK;
-        if (screenSize == Configuration.SCREENLAYOUT_SIZE_SMALL) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
 
         //If launched from Countdown notification then goto countdown clock directly
         if (getIntent() != null && getIntent().getBooleanExtra(AlarmUpdater.INTENT_EXTRA_LAUNCH_COUNTDOWN, false)) {
@@ -89,7 +80,7 @@ public class UltimateStopwatchActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SettingsActivity.loadSettings(settings);
 
-        TabLayout tl = (TabLayout) findViewById(R.id.tablayout);//new TabLayout(this);
+        TabLayout tl = findViewById(R.id.tablayout);//new TabLayout(this);
 
         mTabsAdapter = new TabsAdapter(this);
         mTabsAdapter.addTab(getString(R.string.stopwatch), StopwatchFragment.class, null);
@@ -135,7 +126,7 @@ public class UltimateStopwatchActivity extends AppCompatActivity {
             editor.putInt(KEY_JUMP_TO_PAGE, -1);
         }
 
-        editor.commit();
+        editor.apply();
 
         LapTimeRecorder.getInstance().saveTimes(this);
     }

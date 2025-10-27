@@ -1,27 +1,28 @@
 apply plugin: 'com.android.application'
 
-
 android {
-    // Allows reference to product flavors in your
-    // phone module's build.gradle file
-    publishNonDefault true
+    compileSdk {
+        version = release(35)
+    }
 
     defaultConfig {
         applicationId "com.geekyouup.android.ustopwatch"
         minSdkVersion 23
-        compileSdk 35
         targetSdkVersion 33
-        versionCode 56
-        versionName "8.0.3"
+        versionCode 57
+        versionName "8.1"
     }
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
     namespace 'com.geekyouup.android.ustopwatch'
 }
 
@@ -32,4 +33,9 @@ dependencies {
     compileOnly 'com.google.android.wearable:wearable:2.9.0'
     implementation 'com.google.android.support:wearable:2.9.0'
     implementation 'com.google.android.gms:play-services-wearable:19.0.0'
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
